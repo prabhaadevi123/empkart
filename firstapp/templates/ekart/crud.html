@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        /* Add inline CSS for centering */
+        body {
+            display: flex; /* Use flexbox layout */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            min-height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+            background-color: #f8f9fa; /* Optional: Light background color */
+        }
+
+        .container {
+            text-align: center; /* Center text inside the container */
+            width: 80%; /* Width of the container */
+            max-width: 800px; /* Max width for larger screens */
+            padding: 20px; /* Add some padding for better spacing */
+            background-color: white; /* Background color for the container */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+            border-radius: 8px; /* Optional: Rounded corners */
+        }
+
+        table {
+            width: 100%; /* Make table full width */
+            border-collapse: collapse; /* Collapse borders for better spacing */
+        }
+
+        th, td {
+            padding: 8px; /* Add padding for table cells */
+            text-align: left; /* Align text to the left */
+        }
+
+        th {
+            background-color: #007bff; /* Header background color */
+            color: white; /* Header text color */
+        }
+
+        button {
+            cursor: pointer; /* Change cursor on hover */
+        }
+        /* Style for the Update button */
+#up {
+    background-color: #4CAF50; /* Green color */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#up:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Style for the Delete button */
+#del {
+    background-color: #f44336; /* Red color */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#del:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Members</h1>
+        <table id="customers" border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Country</th>
+                    <th colspan="2" id="mid">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in mem %}
+                <tr>
+                    <td>{{ x.id }}</td>
+                    <td>{{ x.firstname }}</td>
+                    <td>{{ x.lastname }}</td>
+                    <td>{{ x.country }}</td>
+                    <td><a href="update/{{x.id}}"><button id="up">Update</button></a></td>
+                    <td><a href="delete/{{x.id}}"><button id="del">Delete</button></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br><br>
+        <a href="{% url 'add' %}"><button id="new3">Add Member</button></a>
+    </div>
+</body>
+</html>
